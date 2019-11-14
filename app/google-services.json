@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "382925319691",
+    "firebase_url": "https://koc-owi.firebaseio.com",
+    "project_id": "koc-owi",
+    "storage_bucket": "koc-owi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382925319691:android:1ae2d3067156d75c92e10e",
+        "android_client_info": {
+          "package_name": "com.android.kocowi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382925319691-i8ojb5p071feg6fcum3d1gtfj7hf2s9o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.kocowi",
+            "certificate_hash": "51247baa05eff6421afb67f99b356fa2ad164748"
+          }
+        },
+        {
+          "client_id": "382925319691-e1u4b8ssk9aqveb99rhv5qefo0p9r79p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARIkzASkL7Cl_MOHA_cjrgRH3pR9cuUd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382925319691-e1u4b8ssk9aqveb99rhv5qefo0p9r79p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
