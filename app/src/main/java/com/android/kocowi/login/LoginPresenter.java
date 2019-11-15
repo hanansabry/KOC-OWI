@@ -2,6 +2,7 @@ package com.android.kocowi.login;
 
 
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
+import com.android.kocowi.model.User;
 import com.android.kocowi.usecase.AuthenticationUseCaseHandler;
 
 public class LoginPresenter implements LoginContract.Presenter {
@@ -17,8 +18,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(String email, String password, AuthenticationRepository.LoginCallback callback) {
-        mUseCasHandler.login(email, password, callback);
+    public void login(String email, String password, User.UserRole userRole, AuthenticationRepository.LoginCallback callback) {
+        mUseCasHandler.login(email, password, userRole, callback);
     }
 
     @Override

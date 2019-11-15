@@ -2,26 +2,33 @@ package com.android.kocowi.backend.authentication;
 
 import com.android.kocowi.backend.users.UsersRepository;
 import com.android.kocowi.backend.users.UsersRepositoryImpl;
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 
 public class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
     private final FirebaseAuth auth;
+    private final DatabaseReference mDatabase;
 
     public AuthenticationRepositoryImpl() {
         auth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("roles");
     }
 
 
     @Override
-    public void registerNewUser(final ProductionOperation user, final RegistrationCallback callback) {
+    public void registerNewUser(final User user, final RegistrationCallback callback) {
         auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -55,13 +62,30 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
     }
 
     @Override
-    public void login(String email, String password, final LoginCallback callback) {
+    public void login(String email, String password, final User.UserRole userRole, final LoginCallback callback) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            callback.onSuccessLogin(task.getResult().getUser());
+                            final FirebaseUser firebaseUser = task.getResult().getUser();
+                            //check user role
+                            mDatabase.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String role = dataSnapshot.getValue(String.class);
+                                    if (userRole.name().equalsIgnoreCase(role)) {
+                                        callback.onSuccessLogin(firebaseUser);
+                                    } else {
+                                        callback.onFailedLogin("Wrong username/password, Please try again");
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    callback.onFailedLogin(databaseError.getMessage());
+                                }
+                            });
                         } else {
                             if (task.getException() != null) {
                                 callback.onFailedLogin(task.getException().getMessage());

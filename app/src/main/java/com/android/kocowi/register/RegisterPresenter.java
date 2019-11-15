@@ -2,7 +2,7 @@ package com.android.kocowi.register;
 
 
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 import com.android.kocowi.usecase.AuthenticationUseCaseHandler;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
@@ -18,12 +18,12 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
 
     @Override
-    public void registerNewUser(ProductionOperation po, AuthenticationRepository.RegistrationCallback callback) {
+    public void registerNewUser(User po, AuthenticationRepository.RegistrationCallback callback) {
         mUseCaseHandler.registerNewUser(po, callback);
     }
 
     @Override
-    public boolean validateUserData(ProductionOperation po) {
+    public boolean validateUserData(User po) {
         boolean validate = true;
         if (po.getName() == null || po.getName().isEmpty()) {
             validate = false;

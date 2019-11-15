@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +15,8 @@ import com.android.kocowi.Injection;
 import com.android.kocowi.R;
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
 import com.android.kocowi.login.LoginScreen;
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
+import com.android.kocowi.operator.WellDetectActivity;
 import com.android.kocowi.production_operation.GatheringCenterActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,11 +28,15 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     private EditText nameEditText, passwordEditText, emailEditText, phoneEditText;
     private ProgressBar progressBar;
     private Button registerButton;
+    private User.UserRole userRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        String role = getIntent().getExtras().getString(User.class.getName());
+        userRole = User.UserRole.valueOf(role);
 
         mPresenter = new RegisterPresenter(this, Injection.provideAuthenticationUseCaseHandler());
         initializeView();
@@ -80,13 +86,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         registerButton = findViewById(R.id.register);
     }
 
-    private ProductionOperation getPOInputData() {
-        ProductionOperation po = new ProductionOperation();
-        po.setName(nameEditText.getText().toString().trim());
-        po.setPassword(passwordEditText.getText().toString().trim());
-        po.setEmail(emailEditText.getText().toString().trim());
-        po.setPhone(phoneEditText.getText().toString().trim());
-        return po;
+    private User getUserInputData() {
+        User user = new User();
+        user.setName(nameEditText.getText().toString().trim());
+        user.setPassword(passwordEditText.getText().toString().trim());
+        user.setEmail(emailEditText.getText().toString().trim());
+        user.setPhone(phoneEditText.getText().toString().trim());
+        user.setRole(userRole);
+        return user;
     }
 
     @Override
@@ -143,9 +150,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     public void OnRegisterClicked(View view) {
         showProgressBar();
-        ProductionOperation po = getPOInputData();
-        if (mPresenter.validateUserData(po)) {
-            mPresenter.registerNewUser(po, this);
+        User user = getUserInputData();
+        if (mPresenter.validateUserData(user)) {
+            mPresenter.registerNewUser(user, this);
         } else {
             hideProgressBar();
         }
@@ -155,7 +162,17 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     public void onSuccessfulRegistration(FirebaseUser firebaseUser) {
         hideProgressBar();
         Toast.makeText(this, "Registration is successfully completed\n Welcome " + firebaseUser.getEmail(), Toast.LENGTH_LONG).show();
-        goToProductionOperationSection();
+        if (userRole == User.UserRole.PRODUCTION_OPERATION) {
+            goToProductionOperationSection();
+        } else if (userRole == User.UserRole.OPERATOR) {
+            goToOperatorSection();
+        }
+    }
+
+    private void goToOperatorSection() {
+        Intent homeIntent = new Intent(this, WellDetectActivity.class);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homeIntent);
     }
 
     @Override

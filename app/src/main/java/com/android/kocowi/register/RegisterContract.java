@@ -4,7 +4,7 @@ package com.android.kocowi.register;
 import com.android.kocowi.BasePresenter;
 import com.android.kocowi.BaseView;
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 
 public interface RegisterContract {
 
@@ -28,9 +28,9 @@ public interface RegisterContract {
 
     interface Presenter extends BasePresenter {
 
-        void registerNewUser(ProductionOperation po, AuthenticationRepository.RegistrationCallback callback);
+        void registerNewUser(User po, AuthenticationRepository.RegistrationCallback callback);
 
-        boolean validateUserData(ProductionOperation po);
+        boolean validateUserData(User po);
 
     }
 

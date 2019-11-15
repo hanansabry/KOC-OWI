@@ -1,12 +1,20 @@
 package com.android.kocowi.model;
 
-public class ProductionOperation {
+import com.google.firebase.database.Exclude;
+
+public class User {
+
+    public enum UserRole {
+        PRODUCTION_OPERATION,
+        OPERATOR
+    }
 
     private String id;
     private String name;
     private String email;
     private String password;
     private String phone;
+    private UserRole role;
 
     public String getId() {
         return id;
@@ -32,6 +40,7 @@ public class ProductionOperation {
         this.email = email;
     }
 
+    @Exclude
     public String getPassword() {
         return password;
     }
@@ -46,5 +55,13 @@ public class ProductionOperation {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

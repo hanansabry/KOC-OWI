@@ -2,7 +2,7 @@ package com.android.kocowi.usecase;
 
 
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -14,12 +14,12 @@ public class AuthenticationUseCaseHandler {
         mRepository = repository;
     }
 
-    public void registerNewUser(ProductionOperation po, AuthenticationRepository.RegistrationCallback callback){
+    public void registerNewUser(User po, AuthenticationRepository.RegistrationCallback callback){
         mRepository.registerNewUser(po, callback);
     }
 
-    public void login(String email, String password, AuthenticationRepository.LoginCallback callback) {
-        mRepository.login(email, password, callback);
+    public void login(String email, String password, User.UserRole userRole, AuthenticationRepository.LoginCallback callback) {
+        mRepository.login(email, password, userRole, callback);
     }
 
     public void logout() {

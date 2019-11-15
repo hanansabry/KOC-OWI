@@ -1,6 +1,6 @@
 package com.android.kocowi.backend.users;
 
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 
 public interface UsersRepository {
 
@@ -10,5 +10,5 @@ public interface UsersRepository {
         void onUserInsertedFailed(String errmsg);
     }
 
-    void insertNewUser(ProductionOperation user, UserInsertionCallback callback);
+    void insertNewUser(User user, UserInsertionCallback callback);
 }

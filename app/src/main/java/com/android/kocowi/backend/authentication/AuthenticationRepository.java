@@ -1,6 +1,6 @@
 package com.android.kocowi.backend.authentication;
 
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 import com.google.firebase.auth.FirebaseUser;
 
 public interface AuthenticationRepository {
@@ -17,8 +17,8 @@ public interface AuthenticationRepository {
         void onFailedLogin(String errmsg);
     }
 
-    void registerNewUser(ProductionOperation po, RegistrationCallback callback);
+    void registerNewUser(User po, RegistrationCallback callback);
 
-    void login(String email, String password, LoginCallback callback);
+    void login(String email, String password, User.UserRole userRole, LoginCallback callback);
 
 }

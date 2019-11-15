@@ -13,10 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.kocowi.Injection;
-import com.android.kocowi.MainActivity;
 import com.android.kocowi.R;
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
-import com.android.kocowi.model.ProductionOperation;
+import com.android.kocowi.model.User;
 import com.android.kocowi.operator.WellDetectActivity;
 import com.android.kocowi.production_operation.GatheringCenterActivity;
 import com.android.kocowi.register.RegisterActivity;
@@ -30,10 +29,7 @@ public class LoginScreen extends AppCompatActivity implements LoginContract.View
     private EditText emailEditText, passwordEditText;
     private Button loginButton;
     private ProgressBar progressBar;
-    private String selectedRole = PRODUCTION_OPERATION;
-
-    private static final String PRODUCTION_OPERATION = "PRODUCTION_OPERATION";
-    private static final String OPERATOR = "OPERATOR";
+    private User.UserRole selectedRole = User.UserRole.PRODUCTION_OPERATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +70,10 @@ public class LoginScreen extends AppCompatActivity implements LoginContract.View
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.po_role) {
-                    selectedRole = PRODUCTION_OPERATION;
+                    selectedRole = User.UserRole.PRODUCTION_OPERATION;
                     registerButton.setEnabled(true);
                 } else if (checkedId == R.id.operator_role) {
-                    selectedRole = OPERATOR;
+                    selectedRole = User.UserRole.OPERATOR;
                     registerButton.setEnabled(false);
                 }
             }
@@ -91,14 +87,16 @@ public class LoginScreen extends AppCompatActivity implements LoginContract.View
         String password = passwordEditText.getText().toString().trim();
 
         if (mPresenter.validateLoginData(email, password)) {
-            mPresenter.login(email, password, this);
+            mPresenter.login(email, password, selectedRole, this);
         } else {
             hideProgressBar();
         }
     }
 
     public void OnRegisterClicked(View view) {
-        startActivity(new Intent(this, RegisterActivity.class));
+        Intent registerIntent = new Intent(this, RegisterActivity.class);
+        registerIntent.putExtra(User.class.getName(), selectedRole.name());
+        startActivity(registerIntent);
     }
 
     @Override
@@ -132,9 +130,9 @@ public class LoginScreen extends AppCompatActivity implements LoginContract.View
     public void onSuccessLogin(FirebaseUser firebaseUser) {
         hideProgressBar();
         Toast.makeText(this, "Welcome, " + firebaseUser.getEmail(), Toast.LENGTH_LONG).show();
-        if (selectedRole.equals(PRODUCTION_OPERATION)) {
+        if (selectedRole == User.UserRole.PRODUCTION_OPERATION) {
             goToProductionOperationSection();
-        } else if (selectedRole.equals(OPERATOR)) {
+        } else if (selectedRole == User.UserRole.OPERATOR) {
             goToOperatorSection();
         }
     }
