@@ -17,7 +17,7 @@ import com.android.kocowi.R;
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
 import com.android.kocowi.model.User;
 import com.android.kocowi.operator.WellDetectActivity;
-import com.android.kocowi.production_operation.GatheringCenterActivity;
+import com.android.kocowi.production_operation.MainActivity;
 import com.android.kocowi.register.RegisterActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseUser;
@@ -144,7 +144,7 @@ public class LoginScreen extends AppCompatActivity implements LoginContract.View
     }
 
     private void goToProductionOperationSection() {
-        Intent homeIntent = new Intent(this, GatheringCenterActivity.class);
+        Intent homeIntent = new Intent(this, MainActivity.class);
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
     }

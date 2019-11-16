@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".production_operation.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <com.android.kocowi.EmptyRecyclerView
+        android:id="@+id/gc_recycler_views"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_img" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:fontFamily="@font/alegreya_sans_sc_medium"
+            android:gravity="center"
+            android:text="No available GCs\nAdd one now"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </FrameLayout>
+
+</FrameLayout>

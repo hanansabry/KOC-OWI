@@ -14,13 +14,10 @@
             android:theme="@style/MyAppTheme" />
         <activity android:name=".operator.WellDetectActivity" />
         <activity
-            android:name=".production_operation.GatheringCenterActivity"
-            android:theme="@style/MyAppThemeWithBarً" />
-        <activity
             android:name=".login.LoginScreen"
             android:theme="@style/MyAppTheme" />
         <activity
-            android:name=".MainActivity"
+            android:name=".production_operation.MainActivity"
             android:theme="@style/MyAppTheme" />
         <activity
             android:name=".intro.SplashScreen"
