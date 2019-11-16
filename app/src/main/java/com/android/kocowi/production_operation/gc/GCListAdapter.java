@@ -1,8 +1,7 @@
-package com.android.kocowi.production_operation;
+package com.android.kocowi.production_operation.gc;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -14,7 +13,6 @@ import com.android.kocowi.model.GC;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class GCListAdapter extends RecyclerView.Adapter<GCListAdapter.GCViewHolder> {

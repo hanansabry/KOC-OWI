@@ -1,4 +1,4 @@
-package com.android.kocowi.production_operation;
+package com.android.kocowi.production_operation.gc;
 
 import android.view.View;
 

@@ -1,4 +1,4 @@
-package com.android.kocowi.production_operation.add_gc;
+package com.android.kocowi.production_operation.gc.add_gc;
 
 import android.content.Context;
 import android.graphics.Color;

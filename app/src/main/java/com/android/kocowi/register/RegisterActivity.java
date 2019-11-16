@@ -1,7 +1,5 @@
 package com.android.kocowi.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +14,11 @@ import com.android.kocowi.backend.authentication.AuthenticationRepository;
 import com.android.kocowi.login.LoginScreen;
 import com.android.kocowi.model.User;
 import com.android.kocowi.operator.WellDetectActivity;
-import com.android.kocowi.production_operation.MainActivity;
+import com.android.kocowi.production_operation.gc.MainActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseUser;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View, AuthenticationRepository.RegistrationCallback {
 

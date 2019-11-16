@@ -1,6 +1,4 @@
-package com.android.kocowi.production_operation;
-
-import android.view.View;
+package com.android.kocowi.production_operation.gc;
 
 import com.android.kocowi.BasePresenter;
 import com.android.kocowi.BaseView;

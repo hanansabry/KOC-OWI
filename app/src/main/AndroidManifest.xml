@@ -17,7 +17,7 @@
             android:name=".login.LoginScreen"
             android:theme="@style/MyAppTheme" />
         <activity
-            android:name=".production_operation.MainActivity"
+            android:name=".production_operation.gc.MainActivity"
             android:theme="@style/MyAppTheme" />
         <activity
             android:name=".intro.SplashScreen"

@@ -1,4 +1,4 @@
-package com.android.kocowi.production_operation.add_gc;
+package com.android.kocowi.production_operation.gc.add_gc;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

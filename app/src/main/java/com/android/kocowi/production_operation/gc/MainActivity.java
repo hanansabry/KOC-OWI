@@ -1,29 +1,27 @@
-package com.android.kocowi.production_operation;
+package com.android.kocowi.production_operation.gc;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.android.kocowi.EmptyRecyclerView;
 import com.android.kocowi.Injection;
 import com.android.kocowi.R;
 import com.android.kocowi.backend.gc.GcRepository;
 import com.android.kocowi.model.GC;
-import com.android.kocowi.production_operation.add_gc.AddGcBottomFragment;
-
-import android.view.View;
+import com.android.kocowi.production_operation.gc.add_gc.AddGcBottomFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.appcompat.widget.PopupMenu;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import java.util.ArrayList;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GCContract.View, PopupMenu.OnMenuItemClickListener, GcRepository.GcRetrievingCallback {

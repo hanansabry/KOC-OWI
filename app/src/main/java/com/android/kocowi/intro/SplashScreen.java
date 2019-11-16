@@ -1,15 +1,15 @@
 package com.android.kocowi.intro;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.android.kocowi.R;
 import com.android.kocowi.login.LoginScreen;
-import com.android.kocowi.production_operation.MainActivity;
+import com.android.kocowi.production_operation.gc.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
