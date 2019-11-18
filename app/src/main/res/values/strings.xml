@@ -20,4 +20,5 @@
     <string name="name">Name</string>
     <string name="phone">Phone</string>
     <string name="register">Sign UP</string>
+    <string name="title_activity_wells_location_google_map">Map</string>
 </resources>

@@ -14,7 +14,7 @@ import com.android.kocowi.Injection;
 import com.android.kocowi.R;
 import com.android.kocowi.backend.authentication.AuthenticationRepository;
 import com.android.kocowi.model.User;
-import com.android.kocowi.operator.WellDetectActivity;
+import com.android.kocowi.operator.WellsLocationGoogleMap;
 import com.android.kocowi.production_operation.gc.MainActivity;
 import com.android.kocowi.register.RegisterActivity;
 import com.google.android.material.textfield.TextInputLayout;
@@ -138,7 +138,7 @@ public class LoginScreen extends AppCompatActivity implements LoginContract.View
     }
 
     private void goToOperatorSection() {
-        Intent homeIntent = new Intent(this, WellDetectActivity.class);
+        Intent homeIntent = new Intent(this, WellsLocationGoogleMap.class);
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(homeIntent);
     }

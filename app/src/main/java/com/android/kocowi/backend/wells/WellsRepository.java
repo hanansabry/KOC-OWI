@@ -20,5 +20,7 @@ public interface WellsRepository {
 
     void retrieveWells(String gcCode, WellsRetrievingCallback callback);
 
+    void retrieveAllWells(WellsRetrievingCallback callback);
+
     void addNewWell(Well well, WellInsertionCallback callback);
 }
