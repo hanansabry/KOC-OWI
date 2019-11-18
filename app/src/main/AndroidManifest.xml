@@ -3,12 +3,15 @@
     package="com.android.kocowi">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MyAppTheme">
+        <activity android:name=".production_operation.operators.AddOperator"></activity>
+        <activity android:name=".production_operation.wells.WellsActivity" />
         <activity
             android:name=".register.RegisterActivity"
             android:theme="@style/MyAppTheme" />

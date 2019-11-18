@@ -72,7 +72,7 @@ public class GCListAdapter extends RecyclerView.Adapter<GCListAdapter.GCViewHold
 
         @Override
         public void onClick(View v) {
-            presenter.showGcActionsPopupMenu(v);
+            presenter.showGcActionsPopupMenu(v, getAdapterPosition());
         }
     }
 }

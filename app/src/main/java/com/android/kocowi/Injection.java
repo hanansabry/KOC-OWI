@@ -7,6 +7,8 @@ import com.android.kocowi.backend.fieldheaders.FieldHeaderRepository;
 import com.android.kocowi.backend.fieldheaders.FieldHeaderRepositoryImpl;
 import com.android.kocowi.backend.gc.GcRepository;
 import com.android.kocowi.backend.gc.GcRepositoryImpl;
+import com.android.kocowi.backend.wells.WellsRepository;
+import com.android.kocowi.backend.wells.WellsRepositoryImpl;
 import com.android.kocowi.usecase.AuthenticationUseCaseHandler;
 import com.android.kocowi.usecase.GcUseCaseHandler;
 
@@ -32,4 +34,9 @@ public class Injection {
     public static GcRepository provideGcRepository() {
         return new GcRepositoryImpl();
     }
+
+    public static WellsRepository provideWellsRepository() {
+        return new WellsRepositoryImpl();
+    }
+
 }

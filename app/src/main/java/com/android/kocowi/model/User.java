@@ -15,6 +15,7 @@ public class User {
     private String password;
     private String phone;
     private UserRole role;
+    private String gcCode;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public String getGcCode() {
+        return gcCode;
+    }
+
+    public void setGcCode(String gcCode) {
+        this.gcCode = gcCode;
     }
 }

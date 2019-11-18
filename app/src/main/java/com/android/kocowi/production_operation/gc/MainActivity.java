@@ -1,16 +1,22 @@
 package com.android.kocowi.production_operation.gc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.kocowi.EmptyRecyclerView;
 import com.android.kocowi.Injection;
 import com.android.kocowi.R;
 import com.android.kocowi.backend.gc.GcRepository;
+import com.android.kocowi.login.LoginScreen;
 import com.android.kocowi.model.GC;
 import com.android.kocowi.production_operation.gc.add_gc.AddGcBottomFragment;
+import com.android.kocowi.production_operation.operators.AddOperator;
+import com.android.kocowi.production_operation.wells.WellsActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -23,11 +29,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GCContract.View, PopupMenu.OnMenuItemClickListener, GcRepository.GcRetrievingCallback {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        GCContract.View, GcRepository.GcRetrievingCallback {
 
     private GCContract.Presenter presenter;
     private GCListAdapter gcListAdapter;
+    private ProgressBar progressBar;
+    private EmptyRecyclerView gcRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +54,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        progressBar = findViewById(R.id.progress_bar);
+
         initializeGcListRecyclerView();
         presenter.retrieveGcs(this);
+        initializeGcListRecyclerView();
+        initializeNavigationHeaderViews();
+    }
+
+    private void initializeNavigationHeaderViews() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View hView = navigationView.getHeaderView(0);
+        TextView userMailTextView = hView.findViewById(R.id.user_mail_textview);
+        userMailTextView.setText(presenter.getUserEmail());
     }
 
     private void initializeGcListRecyclerView() {
-        EmptyRecyclerView gcRecyclerView = findViewById(R.id.gc_recycler_views);
+        gcRecyclerView = findViewById(R.id.gc_recycler_views);
         gcRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        gcRecyclerView.setEmptyView(findViewById(R.id.empty_view));
         gcListAdapter = new GCListAdapter(presenter);
         gcRecyclerView.setAdapter(gcListAdapter);
     }
@@ -75,18 +94,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_approval) {
+            Toast.makeText(this, "Approval screen", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_logout) {
+            presenter.logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,20 +106,36 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onAddGCFabClicked(View view) {
-//        Snackbar.make(view, "Add new GC", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show();
         AddGcBottomFragment bottomSheetFragment = new AddGcBottomFragment();
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
 
     @Override
-    public void showGcActionsPopupMenu(View v) {
+    public void showGcActionsPopupMenu(View v, final int position) {
         PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.gc_actions);
         popup.show();
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                GC selectedGc = presenter.getSelectedGc(position);
+                switch (item.getItemId()) {
+                    case R.id.add_operator_action:
+                        Intent operatorIntent = new Intent(MainActivity.this, AddOperator.class);
+                        operatorIntent.putExtra(GC.class.getName(), selectedGc);
+                        startActivity(operatorIntent);
+                        return true;
+                    case R.id.add_well_action:
+                        Intent wellIntent = new Intent(MainActivity.this, WellsActivity.class);
+                        wellIntent.putExtra(GC.class.getName(), selectedGc);
+                        startActivity(wellIntent);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
-
 
 
     @Override
@@ -116,34 +143,25 @@ public class MainActivity extends AppCompatActivity
         this.presenter = presenter;
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add_operator_action:
-                Toast.makeText(this, "Add Operator action", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.add_well_action:
-                Toast.makeText(this, "Add Well action", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    //temp
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initializeGcListRecyclerView();
-    }
 
     @Override
     public void onRetrievingGcSuccessfully(ArrayList<GC> gcList) {
         gcListAdapter.bindGcList(gcList);
+        progressBar.setVisibility(View.INVISIBLE);
+        gcRecyclerView.setEmptyView(findViewById(R.id.empty_view));
     }
 
     @Override
     public void onRetrievingGcFailed(String err) {
         Toast.makeText(this, err, Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.INVISIBLE);
+        gcRecyclerView.setEmptyView(findViewById(R.id.empty_view));
+    }
+
+    @Override
+    public void goToLoginScreen() {
+        Intent intent = new Intent(this, LoginScreen.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

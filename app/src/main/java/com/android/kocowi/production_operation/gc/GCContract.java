@@ -11,7 +11,9 @@ public class GCContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showGcActionsPopupMenu(android.view.View v);
+        void showGcActionsPopupMenu(android.view.View v, int position);
+
+        void goToLoginScreen();
     }
 
     interface Presenter extends BasePresenter {
@@ -22,8 +24,14 @@ public class GCContract {
 
         int getGcListSize();
 
-        void showGcActionsPopupMenu(android.view.View v);
+        void showGcActionsPopupMenu(android.view.View v, int position);
 
         void retrieveGcs(GcRepository.GcRetrievingCallback callback);
+
+        GC getSelectedGc(int position);
+
+        void logout();
+
+        String getUserEmail();
     }
 }

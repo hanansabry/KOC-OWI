@@ -6,8 +6,6 @@ import android.os.Handler;
 
 import com.android.kocowi.R;
 import com.android.kocowi.login.LoginScreen;
-import com.android.kocowi.production_operation.gc.MainActivity;
-import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,11 +23,11 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 /* Create an Intent that will start the Menu-ServiceListActivity. */
                 Intent mainIntent;
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+//                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                     mainIntent = new Intent(SplashScreen.this, LoginScreen.class);
-                } else {
-                    mainIntent = new Intent(SplashScreen.this, MainActivity.class);
-                }
+//                } else {
+//                    mainIntent = new Intent(SplashScreen.this, MainActivity.class);
+//                }
                 startActivity(mainIntent);
 
                 finish();

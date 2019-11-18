@@ -1,11 +1,36 @@
 package com.android.kocowi.model;
 
-public class GC {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class GC implements Parcelable {
 
     private String id;
     private String code;
     private String filedHeader;
     private String notes;
+
+    public GC() {
+    }
+
+    protected GC(Parcel in) {
+        id = in.readString();
+        code = in.readString();
+        filedHeader = in.readString();
+        notes = in.readString();
+    }
+
+    public static final Creator<GC> CREATOR = new Creator<GC>() {
+        @Override
+        public GC createFromParcel(Parcel in) {
+            return new GC(in);
+        }
+
+        @Override
+        public GC[] newArray(int size) {
+            return new GC[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -37,5 +62,18 @@ public class GC {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(code);
+        dest.writeString(filedHeader);
+        dest.writeString(notes);
     }
 }

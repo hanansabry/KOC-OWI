@@ -19,6 +19,7 @@ import com.android.kocowi.backend.gc.GcRepository;
 import com.android.kocowi.model.FieldHeader;
 import com.android.kocowi.model.GC;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -157,7 +158,9 @@ public class AddGcBottomFragment extends BottomSheetDialogFragment implements Vi
     @Override
     public void onSuccessfullyAddingNewGc(GC gc) {
         dismiss();
-        Toast.makeText(getContext(), "GC is added successfully", Toast.LENGTH_SHORT).show();
+        Snackbar.make(getActivity().findViewById(android.R.id.content)
+                , "GC is added successfully", Snackbar.LENGTH_LONG);
+//        Toast.makeText(getContext(), "GC is added successfully", Toast.LENGTH_SHORT).show();
     }
 
     @Override

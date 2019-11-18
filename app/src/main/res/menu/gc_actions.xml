@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/add_operator_action"
-        android:title="Add Operator"
+        android:title="GC Operators"
         app:showAsAction="never"
         android:orderInCategory="100"/>
 
     <item android:id="@+id/add_well_action"
-        android:title="Add Well"
+        android:title="GC Wells"
         app:showAsAction="never"
         android:orderInCategory="101"/>
 
