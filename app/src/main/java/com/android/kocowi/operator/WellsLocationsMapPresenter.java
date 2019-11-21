@@ -1,6 +1,7 @@
 package com.android.kocowi.operator;
 
 import com.android.kocowi.backend.wells.WellsRepository;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class WellsLocationsMapPresenter {
 
@@ -15,6 +16,10 @@ public class WellsLocationsMapPresenter {
     }
 
     public void retrieveWellsByGcCode(String gcCode, WellsRepository.WellsRetrievingCallback callback) {
-        wellsRepository.retrieveWells(gcCode, callback);
+        wellsRepository.retrieveWellsByGcCode(gcCode, callback);
+    }
+
+    public void signout() {
+        FirebaseAuth.getInstance().signOut();
     }
 }

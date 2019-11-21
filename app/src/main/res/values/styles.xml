@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -24,6 +24,8 @@
         <item name="actionMenuTextColor">@android:color/black</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorBackgroundFloating">@color/colorAccent</item>
+        <item name="android:colorBackgroundFloating" tools:targetApi="23">@color/colorAccent</item>
     </style>
 
     <style name="MyAppThemeWithBarً" parent="AppTheme">
@@ -31,6 +33,10 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:itemBackground">@color/colorAccent</item>
         <item name="actionMenuTextColor">@android:color/black</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/colorAccent</item>
     </style>
 
 </resources>

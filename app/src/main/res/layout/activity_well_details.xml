@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <RelativeLayout
+        android:id="@+id/well_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".operator.welldetails.WellDetails"
+        android:visibility="invisible">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@null"
+            android:onClick="onBackClicked"
+            android:src="@drawable/ic_back_white" />
+
+        <ImageView
+            android:id="@+id/well_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/back_button"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_oil_drill_icon_200"
+            android:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/well_image_view"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/alegreya_sans_sc_medium"
+            android:text="AD001"
+            android:textColor="@android:color/white"
+            android:textSize="32sp" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/well_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_textview"
+            android:layout_margin="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            android:elevation="8dp"
+            app:cardElevation="10dp"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/well_name_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef"
+                    android:padding="8dp"
+                    android:text="Well Name : AD001"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/gc_code_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef"
+                    android:padding="8dp"
+                    android:text="GC Code : GC001"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/well_latitude_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef"
+                    android:padding="8dp"
+                    android:text="Latitude : 22.4521212"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/well_longitude_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef"
+                    android:padding="8dp"
+                    android:text="Longitude : 30.211"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/well_notes_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef"
+                    android:padding="8dp"
+                    android:text="Notes : my notes"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/well_details"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_rounded_white"
+            android:fontFamily="@font/alegreya_sans_sc_medium"
+            android:onClick="addTodayWellData"
+            android:padding="16dp"
+            android:text="add today well data"
+            android:textColor="@android:color/black" />
+
+    </RelativeLayout>
+</FrameLayout>

@@ -10,5 +10,13 @@ public interface UsersRepository {
         void onUserInsertedFailed(String errmsg);
     }
 
+    interface UsersRetrievingCallback {
+        void onUserRetrievedSuccessfully(User user);
+
+        void onUserRetrievedFailed(String err);
+    }
+
     void insertNewUser(User user, UserInsertionCallback callback);
+
+    void getCurrentUserData(UsersRetrievingCallback callback);
 }

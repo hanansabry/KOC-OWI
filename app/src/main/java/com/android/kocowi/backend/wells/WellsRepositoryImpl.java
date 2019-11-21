@@ -22,8 +22,29 @@ public class WellsRepositoryImpl implements WellsRepository {
     }
 
     @Override
-    public void retrieveWells(String gcCode, final WellsRetrievingCallback callback) {
+    public void retrieveWellsByGcCode(String gcCode, final WellsRetrievingCallback callback) {
         mDatabase.orderByChild("gcCode").equalTo(gcCode).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Well> wellList = new ArrayList<>();
+                for (DataSnapshot gcSnapshot : dataSnapshot.getChildren()) {
+                    Well well = gcSnapshot.getValue(Well.class);
+                    well.setId(gcSnapshot.getKey());
+                    wellList.add(well);
+                }
+                callback.onRetrievingWellsSuccessfully(wellList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                callback.onRetrievingWellsFailed(databaseError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveWellByCode(String wellCode, final WellsRetrievingCallback callback) {
+        mDatabase.orderByChild("name").equalTo(wellCode).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Well> wellList = new ArrayList<>();

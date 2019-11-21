@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.kocowi">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:name=".App"
@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-
+        <activity android:name=".operator.well_day_data.AddWellDayData"></activity>
+        <activity android:name=".operator.welldetails.WellDetails" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -32,13 +33,12 @@
 
         <activity
             android:name=".operator.WellsLocationGoogleMap"
-            android:label="@string/title_activity_wells_location_google_map"></activity>
+            android:label="@string/title_activity_wells_location_google_map" />
         <activity android:name=".production_operation.operators.AddOperator" />
         <activity android:name=".production_operation.wells.WellsActivity" />
         <activity
             android:name=".register.RegisterActivity"
             android:theme="@style/MyAppTheme" />
-        <activity android:name=".operator.WellDetectActivity" />
         <activity
             android:name=".login.LoginScreen"
             android:theme="@style/MyAppTheme" />
@@ -59,6 +59,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name=".geofencing.GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".geofencing.GeofenceTransitionsJobIntentService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

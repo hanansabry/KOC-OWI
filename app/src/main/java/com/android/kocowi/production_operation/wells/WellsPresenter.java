@@ -32,7 +32,7 @@ public class WellsPresenter implements WellsContract.Presenter {
 
     @Override
     public void retrieveWells(String gdCode, WellsRepository.WellsRetrievingCallback callback) {
-        wellsRepository.retrieveWells(gdCode, callback);
+        wellsRepository.retrieveWellsByGcCode(gdCode, callback);
     }
 
     @Override

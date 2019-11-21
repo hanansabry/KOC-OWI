@@ -1,6 +1,9 @@
 package com.android.kocowi.model;
 
-public class Well {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Well implements Parcelable {
 
     private String id;
     private String name;
@@ -8,6 +11,31 @@ public class Well {
     private double latitude;
     private double longitude;
     private String gcCode;
+
+
+    public Well() {
+    }
+
+    protected Well(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        notes = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        gcCode = in.readString();
+    }
+
+    public static final Creator<Well> CREATOR = new Creator<Well>() {
+        @Override
+        public Well createFromParcel(Parcel in) {
+            return new Well(in);
+        }
+
+        @Override
+        public Well[] newArray(int size) {
+            return new Well[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -55,5 +83,20 @@ public class Well {
 
     public void setGcCode(String gcCode) {
         this.gcCode = gcCode;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(notes);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(gcCode);
     }
 }

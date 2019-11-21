@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".operator.WellsLocationGoogleMap">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,14 +12,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:fontFamily="@font/alegreya_sans_sc_medium"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="Available Wells"
-        android:textSize="22sp" />
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Available Wells" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/searching_well_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center"
+        android:background="#90212121"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Searching for nearest Well, Once it is detected you will be redirected to it"
+            android:fontFamily="@font/alef"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:gravity="center" />
+
+    </LinearLayout>
 
 </FrameLayout>

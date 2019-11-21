@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/side_nav_bar">
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:src="@drawable/ic_oil_drill_icon_22" />-->
+
+        <TextView
+            android:id="@+id/sheet_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/alegreya_sans_sc_medium"
+            android:gravity="center"
+            android:text="Add well data"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/whp_input_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:textColorHint="@android:color/white">
+
+        <EditText
+            android:id="@+id/whp_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/alef"
+            android:hint="Well head pressure (whp)"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/flp_input_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:textColorHint="@android:color/white">
+
+        <EditText
+            android:id="@+id/flp_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/alef"
+            android:hint="Flow line Pressure (flp)"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tmp_input_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:textColorHint="@android:color/white">
+
+        <EditText
+            android:id="@+id/tmp_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/alef"
+            android:hint="Temperature"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alef"
+            android:text="Well Status"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/well_status_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:checkedButton="@id/open">
+
+            <RadioButton
+                android:id="@+id/open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:buttonTint="@color/colorAccent"
+                android:fontFamily="@font/alef"
+                android:text="Open"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:buttonTint="@color/colorAccent"
+                android:fontFamily="@font/alef"
+                android:text="Close"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_rounded_color_accent"
+            android:fontFamily="@font/alegreya_sans_sc_medium"
+            android:text="Done" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>

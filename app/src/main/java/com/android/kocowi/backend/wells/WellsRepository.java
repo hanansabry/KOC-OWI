@@ -18,9 +18,11 @@ public interface WellsRepository {
         void onAddingNewWellFailed(String err);
     }
 
-    void retrieveWells(String gcCode, WellsRetrievingCallback callback);
+    void retrieveWellsByGcCode(String gcCode, WellsRetrievingCallback callback);
 
     void retrieveAllWells(WellsRetrievingCallback callback);
+
+    void retrieveWellByCode(String wellCode, WellsRetrievingCallback callback);
 
     void addNewWell(Well well, WellInsertionCallback callback);
 }
