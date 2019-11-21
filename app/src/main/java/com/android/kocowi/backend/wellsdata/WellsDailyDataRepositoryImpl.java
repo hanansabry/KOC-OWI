@@ -29,8 +29,11 @@ public class WellsDailyDataRepositoryImpl implements WellsDailyDataRepository {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<WellDailyData> wellsData = new ArrayList<>();
                 for (DataSnapshot wellDailyDataSnapshot : dataSnapshot.getChildren()) {
-                    wellsData.add(wellDailyDataSnapshot.getValue(WellDailyData.class));
+                    WellDailyData welldata = wellDailyDataSnapshot.getValue(WellDailyData.class);
+                    welldata.setId(wellDailyDataSnapshot.getKey());
+                    wellsData.add(welldata);
                 }
+                callback.onRetrievingWellsDaraSuccessfully(wellsData);
             }
 
             @Override
@@ -53,5 +56,10 @@ public class WellsDailyDataRepositoryImpl implements WellsDailyDataRepository {
                 }
             }
         });
+    }
+
+    @Override
+    public void approveWellData(String wellDataId, boolean checked) {
+        mDatabase.child(wellDataId).child("approved").setValue(checked);
     }
 }

@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".operator.well_day_data.AddWellDayData"></activity>
+        <activity android:name=".production_operation.approval.WellsDailyDataForApprove"></activity>
+        <activity android:name=".operator.well_day_data.AddWellDayData" />
         <activity android:name=".operator.welldetails.WellDetails" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

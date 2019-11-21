@@ -14,6 +14,7 @@ import com.android.kocowi.R;
 import com.android.kocowi.backend.gc.GcRepository;
 import com.android.kocowi.login.LoginScreen;
 import com.android.kocowi.model.GC;
+import com.android.kocowi.production_operation.approval.WellsDailyDataForApprove;
 import com.android.kocowi.production_operation.gc.add_gc.AddGcBottomFragment;
 import com.android.kocowi.production_operation.operators.AddOperator;
 import com.android.kocowi.production_operation.wells.WellsActivity;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_approval) {
-            Toast.makeText(this, "Approval screen", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, WellsDailyDataForApprove.class));
         } else if (id == R.id.nav_logout) {
             presenter.logout();
         }

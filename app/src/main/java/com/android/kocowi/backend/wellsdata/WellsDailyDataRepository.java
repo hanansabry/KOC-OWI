@@ -21,4 +21,6 @@ public interface WellsDailyDataRepository {
     void retrieveAllWellsData(WellsDailyDataRepository.WellsDataRetrievingCallback callback);
 
     void addNewWellDailyData(WellDailyData well, WellsDailyDataRepository.WellDailyDataInsertionCallback callback);
+
+    void approveWellData(String wellDataId, boolean checked);
 }

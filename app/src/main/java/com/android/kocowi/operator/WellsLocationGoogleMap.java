@@ -55,6 +55,7 @@ public class WellsLocationGoogleMap extends AppCompatActivity implements OnMapRe
         setContentView(R.layout.activity_wells_location_google_map);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -89,7 +90,7 @@ public class WellsLocationGoogleMap extends AppCompatActivity implements OnMapRe
 
         // Move camera to kuwait
         LatLng Kuwait = new LatLng(29.380813, 48.012446);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Kuwait, 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Kuwait, 11));
 //        mMap.setOnMarkerClickListener(this);
     }
 
@@ -103,7 +104,7 @@ public class WellsLocationGoogleMap extends AppCompatActivity implements OnMapRe
                 createGeofence(well);
             }
             geofencingHandler.addGeofences(this);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         } else {
             Toast.makeText(this, "No available wells", Toast.LENGTH_SHORT).show();
         }
@@ -179,7 +180,9 @@ public class WellsLocationGoogleMap extends AppCompatActivity implements OnMapRe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        } else if (item.getItemId() == R.id.action_logout) {
             presenter.signout();
             Intent homeIntent = new Intent(this, LoginScreen.class);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

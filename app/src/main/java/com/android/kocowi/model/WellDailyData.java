@@ -6,6 +6,7 @@ public class WellDailyData {
         OPEN, CLOSE
     }
 
+    private String id;
     private double whp;
     private double flp;
     private double temp;
@@ -15,6 +16,9 @@ public class WellDailyData {
     private Well well;
     private boolean approved;
 
+    public WellDailyData() {
+    }
+
     public WellDailyData(double whp, double flp, double temp, String status, String day, String time) {
         this.whp = whp;
         this.flp = flp;
@@ -22,6 +26,14 @@ public class WellDailyData {
         this.status = status;
         this.day = day;
         this.time = time;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getWhp() {
