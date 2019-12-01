@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface WellsDailyDataRepository {
 
     interface WellsDataRetrievingCallback {
-        void onRetrievingWellsDaraSuccessfully(ArrayList<WellDailyData> wellsList);
+        void onRetrievingWellsDataSuccessfully(ArrayList<WellDailyData> wellsList);
 
         void onRetrievingWellsDataFailed(String err);
     }
@@ -18,9 +18,13 @@ public interface WellsDailyDataRepository {
         void onAddingNewWellDataFailed(String err);
     }
 
-    void retrieveAllWellsData(WellsDailyDataRepository.WellsDataRetrievingCallback callback);
+    void retrieveAllWellsData(WellsDataRetrievingCallback callback);
 
-    void addNewWellDailyData(WellDailyData well, WellsDailyDataRepository.WellDailyDataInsertionCallback callback);
+    void addNewWellDailyData(WellDailyData well, WellDailyDataInsertionCallback callback);
 
     void approveWellData(String wellDataId, boolean checked);
+
+    void retrieveWellsDataByGC(String gcCode, WellsDataRetrievingCallback callback);
+
+    void retrieveWellsDataByWell(String gcCode, String wellCode, WellsDataRetrievingCallback callback);
 }

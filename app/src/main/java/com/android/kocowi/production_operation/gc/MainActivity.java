@@ -18,6 +18,7 @@ import com.android.kocowi.production_operation.approval.WellsDailyDataForApprove
 import com.android.kocowi.production_operation.gc.add_gc.AddGcBottomFragment;
 import com.android.kocowi.production_operation.operators.AddOperator;
 import com.android.kocowi.production_operation.wells.WellsActivity;
+import com.android.kocowi.production_operation.wells.reports.WellsReportsActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -99,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, WellsDailyDataForApprove.class));
         } else if (id == R.id.nav_logout) {
             presenter.logout();
+        } else if (id == R.id.nav_report) {
+            startActivity(new Intent(this, WellsReportsActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

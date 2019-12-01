@@ -49,7 +49,7 @@ public class WellsDailyDataForApprove extends AppCompatActivity implements Wells
     }
 
     @Override
-    public void onRetrievingWellsDaraSuccessfully(ArrayList<WellDailyData> wellsList) {
+    public void onRetrievingWellsDataSuccessfully(ArrayList<WellDailyData> wellsList) {
         adapter.bindWellsDailyData(wellsList);
         progressBar.setVisibility(View.INVISIBLE);
         recyclerView.setEmptyView(findViewById(R.id.empty_view));

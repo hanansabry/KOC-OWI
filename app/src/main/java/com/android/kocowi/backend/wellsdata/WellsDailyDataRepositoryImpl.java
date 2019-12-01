@@ -1,5 +1,6 @@
 package com.android.kocowi.backend.wellsdata;
 
+import com.android.kocowi.model.Well;
 import com.android.kocowi.model.WellDailyData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +34,7 @@ public class WellsDailyDataRepositoryImpl implements WellsDailyDataRepository {
                     welldata.setId(wellDailyDataSnapshot.getKey());
                     wellsData.add(welldata);
                 }
-                callback.onRetrievingWellsDaraSuccessfully(wellsData);
+                callback.onRetrievingWellsDataSuccessfully(wellsData);
             }
 
             @Override
@@ -61,5 +62,51 @@ public class WellsDailyDataRepositoryImpl implements WellsDailyDataRepository {
     @Override
     public void approveWellData(String wellDataId, boolean checked) {
         mDatabase.child(wellDataId).child("approved").setValue(checked);
+    }
+
+    @Override
+    public void retrieveWellsDataByGC(final String gcCode, final WellsDataRetrievingCallback callback) {
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<WellDailyData> dailyData = new ArrayList<>();
+                for (DataSnapshot wellDailySnapshot : dataSnapshot.getChildren()) {
+                    WellDailyData wellDailyData = wellDailySnapshot.getValue(WellDailyData.class);
+                    Well well = wellDailyData.getWell();
+                    if (gcCode.equalsIgnoreCase(well.getGcCode())) {
+                        dailyData.add(wellDailyData);
+                    }
+                }
+                callback.onRetrievingWellsDataSuccessfully(dailyData);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                callback.onRetrievingWellsDataFailed(databaseError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void retrieveWellsDataByWell(final String gcCode, final String wellCode, final WellsDataRetrievingCallback callback) {
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<WellDailyData> dailyData = new ArrayList<>();
+                for (DataSnapshot wellDailySnapshot : dataSnapshot.getChildren()) {
+                    WellDailyData wellDailyData = wellDailySnapshot.getValue(WellDailyData.class);
+                    Well well = wellDailyData.getWell();
+                    if (gcCode.equalsIgnoreCase(well.getGcCode()) && wellCode.equalsIgnoreCase(well.getName())) {
+                        dailyData.add(wellDailyData);
+                    }
+                }
+                callback.onRetrievingWellsDataSuccessfully(dailyData);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                callback.onRetrievingWellsDataFailed(databaseError.getMessage());
+            }
+        });
     }
 }
